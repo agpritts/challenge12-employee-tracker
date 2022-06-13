@@ -7,13 +7,13 @@ const validate = require('./addt/validate.js');
 
 connection.connect((error) => {
   if (error) throw error;
-  console.log(chalk.yellow.bold(`========================`));
+  console.log(chalk.blackBright.bold(`====================================================================================`));
   console.log(``);
-  console.log(chalk.greenBright.bold(figlet.textSync('Employee Tracker')));
+  console.log(chalk.cyan.bold(figlet.textSync('Employee Tracker')));
   console.log(``);
-  console.log(`                                                          ` + chalk.greenBright.bold('Created By: Adam Pritts'));
+  console.log(`                                                             ` + chalk.cyan.bold('Created By: Adam Pritts'));
   console.log(``);
-  console.log(chalk.yellow.bold(`========================`));
+  console.log(chalk.blackBright.bold(`====================================================================================`));
   promptUser();
 });
 
@@ -115,26 +115,26 @@ const viewAllEmployees = () => {
                   ORDER BY employee.id ASC`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
-    console.log(chalk.yellow.bold(`========================`));
-    console.log(`                              ` + chalk.green.bold(`Current Employees:`));
-    console.log(chalk.yellow.bold(`========================`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
+    console.log(chalk.cyan.bold(`Current Employees`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
     console.table(response);
-    console.log(chalk.yellow.bold(`========================`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
     promptUser();
   });
 };
 
 const viewAllRoles = () => {
-  console.log(chalk.yellow.bold(`========================`));
-  console.log(`                              ` + chalk.green.bold(`Current Employee Roles:`));
-  console.log(chalk.yellow.bold(`========================`));
+  console.log(chalk.blackBright.bold(`=================================================================`));
+  console.log(chalk.cyan.bold(`Current Employee Roles`));
+  console.log(chalk.blackBright.bold(`=================================================================`));
   const sql =     `SELECT role.id, role.title, department.department_name AS department
                   FROM role
                   INNER JOIN department ON role.department_id = department.id`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
       response.forEach((role) => {console.log(role.title);});
-      console.log(chalk.yellow.bold(`========================`));
+      console.log(chalk.blackBright.bold(`=================================================================`));
       promptUser();
   });
 };
@@ -143,11 +143,11 @@ const viewAllDepartments = () => {
   const sql =   `SELECT department.id AS id, department.department_name AS department FROM department`; 
   connection.query(sql, (error, response) => {
     if (error) throw error;
-    console.log(chalk.yellow.bold(`========================`));
-    console.log(`                              ` + chalk.green.bold(`All Departments:`));
-    console.log(chalk.yellow.bold(`========================`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
+    console.log(chalk.cyan.bold(`All Departments`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
     console.table(response);
-    console.log(chalk.yellow.bold(`========================`));
+    console.log(chalk.blackBright.bold(`=================================================================`));
     promptUser();
   });
 };
@@ -161,19 +161,19 @@ const viewEmployeesByDepartment = () => {
                   LEFT JOIN department ON role.department_id = department.id`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
-      console.log(chalk.yellow.bold(`========================`));
-      console.log(`                              ` + chalk.green.bold(`Employees by Department:`));
-      console.log(chalk.yellow.bold(`========================`));
+      console.log(chalk.blackBright.bold(`=================================================================`));
+      console.log(chalk.cyan.bold(`Employees by Department`));
+      console.log(chalk.blackBright.bold(`=================================================================`));
       console.table(response);
-      console.log(chalk.yellow.bold(`========================`));
+      console.log(chalk.blackBright.bold(`=================================================================`));
       promptUser();
     });
 };
 
 const viewDepartmentBudget = () => {
-  console.log(chalk.yellow.bold(`========================`));
-  console.log(`                              ` + chalk.green.bold(`Budget By Department:`));
-  console.log(chalk.yellow.bold(`========================`));
+  console.log(chalk.blackBright.bold(`=================================================================`));
+  console.log(chalk.cyan.bold(`Budget By Department`));
+  console.log(chalk.blackBright.bold(`=================================================================`));
   const sql =     `SELECT department_id AS id, 
                   department.department_name AS department,
                   SUM(salary) AS budget
@@ -182,7 +182,7 @@ const viewDepartmentBudget = () => {
   connection.query(sql, (error, response) => {
     if (error) throw error;
       console.table(response);
-      console.log(chalk.yellow.bold(`========================`));
+      console.log(chalk.blackBright.bold(`=================================================================`));
       promptUser();
   });
 };
@@ -252,7 +252,7 @@ const addEmployee = () => {
                                   VALUES (?, ?, ?, ?)`;
                     connection.query(sql, crit, (error) => {
                     if (error) throw error;
-                    console.log("Employee has been added!")
+                    console.log("Employee has been added")
                     viewAllEmployees();
               });
             });
@@ -315,9 +315,9 @@ const addRole = () => {
 
             connection.query(sql, crit, (error) => {
               if (error) throw error;
-              console.log(chalk.yellow.bold(`========================`));
-              console.log(chalk.greenBright(`Role successfully created!`));
-              console.log(chalk.yellow.bold(`========================`));
+              console.log(chalk.blackBright.bold(`=================================================================`));
+              console.log(chalk.cyan(`Role successfully created`));
+              console.log(chalk.blackBright.bold(`=================================================================`));
               viewAllRoles();
             });
           });
@@ -340,7 +340,7 @@ const addDepartment = () => {
         connection.query(sql, answer.newDepartment, (error, response) => {
           if (error) throw error;
           console.log(``);
-          console.log(chalk.greenBright(answer.newDepartment + ` Department successfully created!`));
+          console.log(chalk.cyan(answer.newDepartment + ` Department successfully created`));
           console.log(``);
           viewAllDepartments();
         });
@@ -400,9 +400,9 @@ const updateEmployeeRole = () => {
               [newTitleId, employeeId],
               (error) => {
                 if (error) throw error;
-                console.log(chalk.greenBright.bold(`========================`));
-                console.log(chalk.greenBright(`Employee Role Updated`));
-                console.log(chalk.greenBright.bold(`========================`));
+                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.cyan(`Employee Role Updated`));
+                console.log(chalk.cyan.bold(`=================================================================`));
                 promptUser();
               }
             );
@@ -450,9 +450,9 @@ const updateEmployeeManager = () => {
           });
 
           if (validate.isSame(answer.chosenEmployee, answer.newManager)) {
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             console.log(chalk.redBright(`Invalid Manager Selection`));
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             promptUser();
           } else {
             let sql = `UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?`;
@@ -462,9 +462,9 @@ const updateEmployeeManager = () => {
               [managerId, employeeId],
               (error) => {
                 if (error) throw error;
-                console.log(chalk.greenBright.bold(`========================`));
-                console.log(chalk.greenBright(`Employee Manager Updated`));
-                console.log(chalk.greenBright.bold(`========================`));
+                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.cyan(`Employee Manager Updated`));
+                console.log(chalk.cyan.bold(`=================================================================`));
                 promptUser();
               }
             );
@@ -505,9 +505,9 @@ const removeEmployee = () => {
           let sql = `DELETE FROM employee WHERE employee.id = ?`;
           connection.query(sql, [employeeId], (error) => {
             if (error) throw error;
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             console.log(chalk.redBright(`Employee Successfully Removed`));
-            console.log(chalk.RedBright.bold(`========================`));
+            console.log(chalk.RedBright.bold(`=================================================================`));
             viewAllEmployees();
           });
         });
@@ -543,9 +543,9 @@ const removeRole = () => {
           let sql =   `DELETE FROM role WHERE role.id = ?`;
           connection.query(sql, [roleId], (error) => {
             if (error) throw error;
-            console.log(chalk.redBright.bold(`========================`));
-            console.log(chalk.greenBright(`Role Successfully Removed`));
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
+            console.log(chalk.cyan(`Role Successfully Removed`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             viewAllRoles();
           });
         });
@@ -580,9 +580,9 @@ const removeDepartment = () => {
           let sql =     `DELETE FROM department WHERE department.id = ?`;
           connection.query(sql, [departmentId], (error) => {
             if (error) throw error;
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             console.log(chalk.redBright(`Department Successfully Removed`));
-            console.log(chalk.redBright.bold(`========================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             viewAllDepartments();
           });
         });
