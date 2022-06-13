@@ -340,7 +340,7 @@ const addDepartment = () => {
         connection.query(sql, answer.newDepartment, (error, response) => {
           if (error) throw error;
           console.log(``);
-          console.log(chalk.cyan(answer.newDepartment + ` Department successfully created`));
+          console.log(chalk.cyan(answer.newDepartment + `Department successfully created`));
           console.log(``);
           viewAllDepartments();
         });
@@ -400,9 +400,9 @@ const updateEmployeeRole = () => {
               [newTitleId, employeeId],
               (error) => {
                 if (error) throw error;
-                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.blackBright.bold(`=================================================================`));
                 console.log(chalk.cyan(`Employee Role Updated`));
-                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.blackBright.bold(`=================================================================`));
                 promptUser();
               }
             );
@@ -462,9 +462,9 @@ const updateEmployeeManager = () => {
               [managerId, employeeId],
               (error) => {
                 if (error) throw error;
-                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.blackBright.bold(`=================================================================`));
                 console.log(chalk.cyan(`Employee Manager Updated`));
-                console.log(chalk.cyan.bold(`=================================================================`));
+                console.log(chalk.blackBright.bold(`=================================================================`));
                 promptUser();
               }
             );
@@ -507,7 +507,7 @@ const removeEmployee = () => {
             if (error) throw error;
             console.log(chalk.redBright.bold(`=================================================================`));
             console.log(chalk.redBright(`Employee Successfully Removed`));
-            console.log(chalk.RedBright.bold(`=================================================================`));
+            console.log(chalk.redBright.bold(`=================================================================`));
             viewAllEmployees();
           });
         });
@@ -544,7 +544,7 @@ const removeRole = () => {
           connection.query(sql, [roleId], (error) => {
             if (error) throw error;
             console.log(chalk.redBright.bold(`=================================================================`));
-            console.log(chalk.cyan(`Role Successfully Removed`));
+            console.log(chalk.redBright(`Role Successfully Removed`));
             console.log(chalk.redBright.bold(`=================================================================`));
             viewAllRoles();
           });
