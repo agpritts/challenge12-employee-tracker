@@ -409,7 +409,7 @@ const updateEmployeeRole = () => {
           });
       });
     });
-  };
+};
 
 const updateEmployeeManager = () => {
     let sql =       `SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id
